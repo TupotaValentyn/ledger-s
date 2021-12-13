@@ -5,7 +5,7 @@ import AppBtc from "@ledgerhq/hw-app-btc";
 // Keep this import if you want to use a Ledger Nano S/X with the USB protocol and delete the @ledgerhq/hw-transport-webhid import
 import TransportWebUSB from "@ledgerhq/hw-transport-webusb";
 // Keep this import if you want to use a Ledger Nano S/X with the HID protocol and delete the @ledgerhq/hw-transport-webusb import
-import TransportWebHID from "@ledgerhq/hw-transport-webhid";
+// import TransportWebHID from "@ledgerhq/hw-transport-webhid";
 
 //Display the header in the div which has the ID "main"
 const initial = "<h1>Connect your Ledger and open Bitcoin app. Click anywhere to start...</h1>";
@@ -21,7 +21,7 @@ document.body.addEventListener("click", async () => {
     const transport = await TransportWebUSB.create();
 
     //trying to connect to your Ledger device with HID protocol
-    const transport = await TransportWebHID.create();
+    // const transport = await TransportWebHID.create();
 
     //listen to the events which are sent by the Ledger packages in order to debug the app
     listen(log => console.log(log))
@@ -30,7 +30,7 @@ document.body.addEventListener("click", async () => {
     const appBtc = new AppBtc(transport);
     const { bitcoinAddress } = await appBtc.getWalletPublicKey(
       "44'/0'/0'/0/0",
-      { verify: false, format: "legacy"}
+      { verify: false, format: "legacy" }
     );
 
     //Display your bitcoin address on the screen
@@ -40,7 +40,7 @@ document.body.addEventListener("click", async () => {
     $main.appendChild(h2);
 
     //Display the address on the Ledger device and ask to verify the address
-    await appBtc.getWalletPublicKey("44'/0'/0'/0/0", {format:"legacy", verify: true});
+    await appBtc.getWalletPublicKey("44'/0'/0'/0/0", { format: "legacy", verify: true });
   } catch (e) {
 
     //Catch any error thrown and displays it on the screen
